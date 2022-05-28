@@ -57,7 +57,7 @@ body {
 
 #log>div {
     /*chat transparency*/
-    opacity: .8;    
+    opacity: .6;    
     position: relative;
 	/*Adjust scroll speed here. Replace 3s*/
     animation: LRMove 6s linear, RLMove 1s linear 1s forwards;   
@@ -95,7 +95,7 @@ body {
 }
 
 #log .message {
-    
+
 }
 
 /*
