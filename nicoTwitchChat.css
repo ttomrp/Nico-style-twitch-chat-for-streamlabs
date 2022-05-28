@@ -38,13 +38,13 @@ body {
 }
 
 #log {
-    display: table;
-    position: absolute;
+    display: flex;
+    position: relative;
     bottom: 0;
     left: 0;
     padding: 0 10px 10px;
     width: 100%;
-    table-layout: fixed;
+    height: 100%;
 }
 
 #log>div {
