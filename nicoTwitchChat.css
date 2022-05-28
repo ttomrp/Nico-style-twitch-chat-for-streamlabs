@@ -1,13 +1,24 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:700);
 
-/*Basic scrolling animation.  If the text lingers on screen increase {left:120%;} and {right: 120%;}*/
+/*
+    Basic scrolling animation.
+	LRMove 100% {left: -x%}
+    x needs to be equal or greater than the Chatlist item's width which is shown in #log>div{...}
+    with a minus (-) sign in front of the value
+    
+	For example, if #log>div {width: 65%}
+	LRMove 100% {left: -65%}
+
+	RLMove is needed to ensure the message remains offscreen after the LRMove animation is completed
+	RLMove needs to remain unchanged
+*/
 @keyframes LRMove {    
     0% {left: 120%;}
-    100% {left: 0%;} 
+    100% {left: -65%;} 
 }
 
 @keyframes RLMove {
-    0% {right: 0%;}
+    0% {right: 120%;}
     100% {right: 120%;}
 }
 
@@ -30,14 +41,23 @@ body {
     color: {text_color};
 }
 
-#log>div {
-}
-
 .colon {
     display: none;
 }
 
-#log {
+#chat-box>div {
+    /*chat transparency*/
+    opacity: .8;    
+    position: relative;
+	/*Adjust scroll speed here. Replace 3s*/
+    animation: LRMove 3s linear, RLMove 3s linear 3s forwards;   
+    -webkit-animation: LRMove 3s linear, RLMove 3s linear 3s forwards;
+    word-wrap: break-word;
+    width: 65%;
+
+}
+
+#chat-box {
     display: flex;
     position: relative;
     bottom: 0;
@@ -47,15 +67,15 @@ body {
     height: 100%;
 }
 
-#log>div {
+#chat-box>div {
     display: table-row;
 }
 
-#log>div.deleted {
+#chat-box>div.deleted {
     visibility: hidden;
 }
 
-#log .emote {
+#chat-box .emote {
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
@@ -63,40 +83,28 @@ body {
     position: relative;
 }
 
-#log .emote img {
+#chat-box .emote img {
     display: inline-block;
     height: 1em;
     opacity: 0;
 }
 
-#log .message,#log .meta {
+#chat-box .message,#chat-box .meta {
     vertical-align: top;
-    display: table-cell;
     padding-bottom: 0.1em;
 }
 
-#log .meta {
-    width: 35%;
-    text-align: right;
-    padding-right: 0.5em;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
+#chat-box .meta {
 }
 
-#log .message {
-	/*chat transparency*/
-    opacity: .8;    
-    position: relative;
-	/*Adjust scroll speed here. Replace 3s*/
-    animation: LRMove 3s linear, RLMove 3s linear 3s forwards;   
-    -webkit-animation: LRMove 3s linear, RLMove 3s linear 3s forwards;
-    word-wrap: break-word;
-    width: 65%;
+#chat-box .message {
 }
 
-/*Badges and usernames are disabled. Enabling them and adding them to the animation kind of breaks it.
- Feel free to get it working if you'd like*/
+/*
+    Badges and usernames are disabled. 
+    Enable them by changing the display property to 'inline-block'
+    Disable them by changing the display property to 'none' 
+*/
 .badge {
     display: none;
     margin-right: 0.2em;
